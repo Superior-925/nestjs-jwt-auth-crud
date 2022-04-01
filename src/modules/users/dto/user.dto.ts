@@ -17,7 +17,7 @@ export class UserDto {
   @IsPhoneNumber("RU")
   readonly phone_number: string;
 
-  @ApiProperty({ example: "111111", description: 'Password of user' })
+  @ApiProperty({ example: "111111", description: 'Password of user, min length 6 symbols' })
   @IsNotEmpty()
   @MinLength(6)
   readonly password: string;
