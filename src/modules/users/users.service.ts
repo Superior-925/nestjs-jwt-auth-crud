@@ -6,7 +6,7 @@ import { UserDto } from './dto/user.dto';
 import { USER_REPOSITORY } from '../../core/constants';
 import { GetAllDto } from "./dto/get-all.dto";
 import { UsersDto } from "./dto/users.dto";
-import { SingleUserDto } from "./dto/single-user.dto";
+import { UpdateSingleUserDto } from "./dto/update-single-user.dto";
 
 @Injectable()
 export class UsersService {
@@ -15,13 +15,6 @@ export class UsersService {
   async create(user: UserDto): Promise<User> {
     return await this.userRepository.create<User>(user);
   }
-
-  // async update(user: UserDto): Promise<[affectedCount: number, affectedRows: User[]]> {
-  //   return await this.userRepository.update<User>(
-  //     { name: user.name },
-  //     { where: { id: user.id } }
-  //   )
-  // }
 
   async findOneByEmail(email: string): Promise<User> {
     return await this.userRepository.findOne<User>({ where: { email: email } });
@@ -65,27 +58,15 @@ export class UsersService {
     };
   }
 
-  async findOne(query: SingleUserDto) {
-    return await this.userRepository.findOne<User>({ where: {
-        [Op.or]: [
-          {
-            email: {[Op.like]: `%${query.email}%`},
-          },
-          {
-            phone_number: {
-              [Op.like]: `%${query.phone_number}%`
-            }
-          }
-        ]
-      } });
-  }
+  async update(id: number, user: UpdateSingleUserDto ) {
 
-  async update(id: number, user: UserDto ) {
-    return await this.userRepository.update({ name: user.name }, {
-      where: {
-        id: id
-      }
-  })
+    const foundUser = await this.userRepository.findByPk(id);
+
+    foundUser.name = user.name;
+
+    await foundUser.save();
+
+    return foundUser;
   };
 
   async delete(id: number) {

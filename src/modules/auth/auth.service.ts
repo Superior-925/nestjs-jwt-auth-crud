@@ -17,7 +17,7 @@ export class AuthService {
 
     let user;
 
-    // find if user enter phone
+    // find user if entered phone
     if (regExpPhone.test(value.toString()) === true) {
       user = await this.userService.findOneByPhone(value.toString());
       if (!user) {
@@ -25,7 +25,7 @@ export class AuthService {
       }
     }
 
-    // find if user enter email
+    // find user if entered email
     if (regExpEmail.test(value) === true) {
       user = await this.userService.findOneByEmail(value);
       if (!user) {
