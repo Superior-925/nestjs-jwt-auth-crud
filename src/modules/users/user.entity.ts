@@ -43,14 +43,14 @@ export class User extends Model<User> {
   })
   password: string;
 
-  @ApiProperty({ example: "2022-04-02T22:11:11.399Z", description: 'Created date' })
+  @ApiProperty({ example: "2022-04-02T22:11:11.399Z", description: 'Date of creation' })
   @Column({
     type: DataType.DATE,
     allowNull: false,
   })
   createdAt: string;
 
-  @ApiProperty({ example: "2022-04-02T22:12:26.222Z", description: 'Created date' })
+  @ApiProperty({ example: "2022-04-02T22:12:26.222Z", description: 'Update date' })
   @Column({
     type: DataType.DATE,
     allowNull: false,
