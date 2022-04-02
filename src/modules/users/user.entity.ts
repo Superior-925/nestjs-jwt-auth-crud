@@ -4,6 +4,16 @@ import { ApiProperty } from "@nestjs/swagger";
 @Table
 export class User extends Model<User> {
 
+  @ApiProperty({ example: "5", description: 'Id of record' })
+  @Column({
+    type: DataType.INTEGER,
+    allowNull: false,
+    autoIncrement: true,
+    unique: true,
+    primaryKey: true,
+  })
+  id: number;
+
   @ApiProperty({ example: "Tony", description: 'The name of user' })
   @Column({
     type: DataType.STRING,
@@ -32,4 +42,18 @@ export class User extends Model<User> {
     allowNull: false,
   })
   password: string;
+
+  @ApiProperty({ example: "2022-04-02T22:11:11.399Z", description: 'Created date' })
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+  })
+  createdAt: string;
+
+  @ApiProperty({ example: "2022-04-02T22:12:26.222Z", description: 'Created date' })
+  @Column({
+    type: DataType.DATE,
+    allowNull: false,
+  })
+  updatedAt: string;
 }
