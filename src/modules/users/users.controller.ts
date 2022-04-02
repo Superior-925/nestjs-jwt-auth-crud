@@ -3,6 +3,9 @@ import { AuthGuard } from '@nestjs/passport';
 import {UsersService} from "./users.service";
 import  { GetAllDto } from "./dto/get-all.dto";
 import { UpdateSingleUserDto } from "./dto/update-single-user.dto";
+import { UsersDto } from "./dto/users.dto";
+import { UserDto } from "./dto/user.dto";
+import { User } from "./user.entity";
 
 import {
   ApiOperation,
@@ -20,7 +23,8 @@ export class UsersController {
   @ApiOperation({ summary: 'Find users with params' })
   @ApiResponse({
     status: 200,
-    description: 'Return found users'
+    description: 'Return found users',
+    type: [UsersDto]
   })
   async findAll(
     @Query() query: GetAllDto
@@ -41,7 +45,8 @@ export class UsersController {
   @ApiOperation({ summary: 'Update one of users' })
   @ApiResponse({
     status: 200,
-    description: 'Return updated user'
+    description: 'Return updated user',
+    type: User
   })
   async update(@Param('id') id: number, @Body() user: UpdateSingleUserDto) {
     // get the number of row affected and the updated post
@@ -61,7 +66,8 @@ export class UsersController {
   @ApiOperation({ summary: 'Delete one of users' })
   @ApiResponse({
     status: 200,
-    description: 'Return success message'
+    description: 'Return success message',
+    type: User
   })
   async delete(@Param('id') id: number, @Request() req) {
     const deleted = await this.userService.delete(id);
@@ -72,6 +78,6 @@ export class UsersController {
     }
 
     // return success message
-    return 'Successfully deleted';
+    return deleted;
   }
 }

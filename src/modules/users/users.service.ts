@@ -58,7 +58,7 @@ export class UsersService {
     };
   }
 
-  async update(id: number, user: UpdateSingleUserDto ) {
+  async update(id: number, user: UpdateSingleUserDto ): Promise<User> {
 
     const foundUser = await this.userRepository.findByPk(id);
 
@@ -70,6 +70,9 @@ export class UsersService {
   };
 
   async delete(id: number) {
-    return await this.userRepository.destroy({ where: { id: id } });
+
+    const foundUser = await this.userRepository.findByPk(id);
+    await foundUser.destroy();
+    return foundUser;
   }
 }

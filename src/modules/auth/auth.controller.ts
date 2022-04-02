@@ -3,6 +3,7 @@ import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { UserDto } from '../users/dto/user.dto';
 import { DoesUserExist } from '../../core/guards/doesUserExist.guard';
+import { User } from "../users/user.entity";
 
 import {
   ApiOperation,
@@ -21,7 +22,8 @@ export class AuthController {
   @ApiOperation({ summary: 'User login' })
   @ApiResponse({
     status: 201,
-    description: 'Return user and token'
+    description: 'Return user and token',
+    type: User
   })
   async login(@Request() req) {
     return await this.authService.login(req.user);
@@ -32,7 +34,8 @@ export class AuthController {
   @ApiOperation({ summary: 'User signup' })
   @ApiResponse({
     status: 201,
-    description: 'Return user and token'
+    description: 'Return user and token',
+    type: User
   })
   async signUp(@Body() user: UserDto) {
     return await this.authService.create(user);

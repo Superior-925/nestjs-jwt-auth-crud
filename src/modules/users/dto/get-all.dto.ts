@@ -2,7 +2,7 @@ import { IsNotEmpty} from 'class-validator';
 import { ApiProperty } from '@nestjs/swagger';
 
 export class GetAllDto {
-  @ApiProperty({ example: "Tony", description: 'The name of user for searching' })
+  @ApiProperty({ example: "user", description: 'The name of user for searching' })
   readonly name?: string;
 
   @ApiProperty({ example: "asd@mail.ru", description: 'The email of user for searching' })
