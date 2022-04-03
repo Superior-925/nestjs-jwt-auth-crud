@@ -4,7 +4,6 @@ import {UsersService} from "./users.service";
 import  { GetAllDto } from "./dto/get-all.dto";
 import { UpdateSingleUserDto } from "./dto/update-single-user.dto";
 import { UsersDto } from "./dto/users.dto";
-import { UserDto } from "./dto/user.dto";
 import { User } from "./user.entity";
 
 import {

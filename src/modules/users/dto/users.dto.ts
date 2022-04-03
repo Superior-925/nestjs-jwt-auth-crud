@@ -1,5 +1,5 @@
-import { UserDto } from '../dto/user.dto';
 import { ApiProperty } from '@nestjs/swagger';
+import { User } from "../user.entity";
 
 export class UsersDto {
   @ApiProperty({ example: "3", description: 'Count of records in table' })
@@ -34,6 +34,7 @@ export class UsersDto {
           "updatedAt": "2022-04-01T22:16:22.598Z"
         }
       ]
-    }, description: 'Count of record in table' })
-  data: UserDto[]
+    },
+    description: 'Count of record in table' })
+  data: User[];
 }
