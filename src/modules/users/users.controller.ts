@@ -23,7 +23,7 @@ export class UsersController {
   @ApiResponse({
     status: 200,
     description: 'Return found users',
-    type: [UsersDto]
+    type: UsersDto
   })
   async findAll(
     @Query() query: GetAllDto

@@ -36,7 +36,6 @@ export class User extends Model<User> {
   })
   phone_number: string;
 
-  @ApiProperty({ example: "111111", description: 'Password of user, min length 6 symbols' })
   @Column({
     type: DataType.STRING,
     allowNull: false,

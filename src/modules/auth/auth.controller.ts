@@ -1,9 +1,9 @@
-import { Controller, Body, Post, UseGuards, Request } from '@nestjs/common';
+import { Controller, Body, Post, UseGuards, Request, Res } from "@nestjs/common";
 import { AuthGuard } from '@nestjs/passport';
 import { AuthService } from './auth.service';
 import { UserDto } from '../users/dto/user.dto';
 import { DoesUserExist } from '../../core/guards/doesUserExist.guard';
-import { User } from "../users/user.entity";
+import { ResponseUserDto } from "../users/dto/response-user.dto";
 
 import {
   ApiOperation,
@@ -23,7 +23,7 @@ export class AuthController {
   @ApiResponse({
     status: 201,
     description: 'Return user and token',
-    type: User
+    type: ResponseUserDto
   })
   async login(@Request() req) {
     return await this.authService.login(req.user);
@@ -35,7 +35,7 @@ export class AuthController {
   @ApiResponse({
     status: 201,
     description: 'Return user and token',
-    type: User
+    type: ResponseUserDto
   })
   async signUp(@Body() user: UserDto) {
     return await this.authService.create(user);

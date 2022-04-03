@@ -49,6 +49,9 @@ export class UsersService {
             }
           }
         ]
+      },
+      attributes: {
+        exclude: ['password']
       }
     });
 
@@ -60,7 +63,10 @@ export class UsersService {
 
   async update(id: number, user: UpdateSingleUserDto ): Promise<User> {
 
-    const foundUser = await this.userRepository.findByPk(id);
+    const foundUser = await this.userRepository.findByPk(id,
+      {attributes: {
+              exclude: ['password']
+    }});
 
     foundUser.name = user.name;
 
@@ -71,7 +77,10 @@ export class UsersService {
 
   async delete(id: number) {
 
-    const foundUser = await this.userRepository.findByPk(id);
+    const foundUser = await this.userRepository.findByPk(id,
+      {attributes: {
+              exclude: ['password']
+      }});
     await foundUser.destroy();
     return foundUser;
   }
